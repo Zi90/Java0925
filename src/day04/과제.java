@@ -13,12 +13,9 @@ import java.util.Scanner;
 
 class Product {
 	private String name = new String();
-	private String price = new String();
-	private int cnt;
+	private int price;
 	
 	public Product() {}
-	
-	private String [] ProductList = new String[10];
 	
 	@Override
 	public String toString() {
@@ -26,26 +23,9 @@ class Product {
 		return "[" + name + " : " + price + "]";
 	}
 	
-//	public void printList() {
-//		if(ProductList.length == 0 || cnt == 0) {
-//			System.out.println("상품이 없습니다.");
-//			return;
-//		}
-//		for(int i=0;i<cnt;i++) {
-//			System.out.print(ProductList[i]);
-//		}
-//		System.out.println();
-//	}
-	
-	public void Scanner(String name, String price) {
-		if(cnt >= 10) {
-			System.out.println("더이상 수강하실 수 없습니다.");
-			return;
-		}
+	public void Scanner(String name, int price) {
 		this.name = name;
 		this.price = price;
-		
-		cnt++;
 	}
 
 	public String getName() {
@@ -56,11 +36,11 @@ class Product {
 		this.name = name;
 	}
 
-	public String getPrice() {
+	public int getPrice() {
 		return price;
 	}
 
-	public void setPrice(String price) {
+	public void setPrice(int price) {
 		this.price = price;
 	}
 	
@@ -76,34 +56,37 @@ public class 과제 {
 		 */
 		Product[] p = new Product[10];
 		Scanner scan = new Scanner(System.in);
+//		Product a = new Product(); // 1개의 객체를 변경해서 계속 배열에 추가 (연결링크만 복사됨)
 		
-		boolean check = true;
 		int cnt = 0;
-		String word = "";
+		char word = 'y';
 		String word1 = "";
-		String word2 = "";
+		int word2 = 0;
 		
 		do {
 			System.out.println("상품을 등록하시겠습니까? (y/n)");
-			word = scan.next();
-			if(word.equals("y")) {
+			word = scan.next().charAt(0); // 1글자 입력
+			if(word == 'y') {
 				System.out.println("상품을 등록해주세요. ex:사탕 500");
 				word1 = scan.next();
-				word2 = scan.next();
+				word2 = scan.nextInt();
 				if(cnt == 10) {
 					System.out.println("상품을 다 등록했습니다.");
-				}else if(word1 != null && word2 != null) {
-					Product a = new Product();
+				}else if(word1 != null && word2 != 0) {
+					Product a = new Product();           // 추가 메서드
 					a.Scanner(word1, word2);
 					p[cnt] = a;
 					cnt++;
 				}
 			}else {
-				System.out.println("종료합니다.");
-				check = false;
+				if(word == 'n') {					
+					System.out.println("종료합니다.");
+				}else {
+					System.out.println("y/n만 가능합니다.");
+				}
 			}
 			
-		}while(check);
+		}while(word != 'n'); // !(c. equals("n")) => String일 경우
 		
 		for(int i = 0; i < cnt; i++) {
 			System.out.println(p[i].toString());
