@@ -7,16 +7,22 @@ public class Order extends Menu{
 	private int totalPrice;
 	
 	public Order() {}
-	public Order(int id, String name, int price, int cnt) {
+	public Order(int id, String name, int price, int cnt, int orderNum) {
 		super(id, name, price);
+		this.orderNum = orderNum;
 		this.cnt = cnt;
 		this.totalPrice = cnt * price;
 	}
 	
-	// 출력메서드
+	// 출력메서드, super.toString(); // 부모의 toString 호출
+	public void orderPrint() {
+		System.out.println(super.toString()+"/");
+		System.out.println(cnt+"개 주문 => 금액 : " + totalPrice);
+	}
+	
 	@Override
 	public String toString() {
-		return "Order [orderNum=" + orderNum + ", cnt=" + cnt + ", totalPrice=" + totalPrice + "]";
+		return "orderNum=" + orderNum + super.toString() + ", cnt=" + cnt + ", totalPrice=" + totalPrice;
 	}
 	
 	// getter & setter
