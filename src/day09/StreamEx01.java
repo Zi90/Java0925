@@ -72,6 +72,8 @@ public class StreamEx01 {
 			}
 		}).forEach(n -> System.out.println("이름 : " + n.getName() + " | 나이 : " + n.getAge() + " | 비용 : " + n.getCost() + "만원"));
 		
+		
+		
 	}
 
 	public String getName() {
